@@ -9,4 +9,6 @@ public interface PersonService {
     Person findById(Long id);
     Person create(Person person);
     List<Person> findAll();
+
+    void deleteById(Long id);
 }

@@ -2,6 +2,7 @@ package edu.matheus.testetecnico.gastosresidencias.service.imp;
 
 import edu.matheus.testetecnico.gastosresidencias.domain.model.Person;
 import edu.matheus.testetecnico.gastosresidencias.repository.PersonRepository;
+import edu.matheus.testetecnico.gastosresidencias.repository.TransactionRepository;
 import edu.matheus.testetecnico.gastosresidencias.service.PersonService;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +13,11 @@ import java.util.NoSuchElementException;
 public class PersonServiceImp implements PersonService {
 
     private final PersonRepository personRepository;
+    private final TransactionRepository transactionRepository;
 
-    public PersonServiceImp(PersonRepository personRepository){
+    public PersonServiceImp(PersonRepository personRepository, TransactionRepository transactionRepository){
         this.personRepository = personRepository;
+        this.transactionRepository = transactionRepository;
     }
 
     @Override
@@ -30,5 +33,12 @@ public class PersonServiceImp implements PersonService {
     @Override
     public List<Person> findAll() {
         return personRepository.findAll();
+    }
+
+    @Override
+    public void deleteById(Long id){
+        findById(id); //Se não encontrar, joga excessão NoSuchElement e cód 500
+        personRepository.deleteById(id); //Deleta a pessoa
+        transactionRepository.deleteAllByPerson(id); //Deleta as transações que a pessoa realizou
     }
 }

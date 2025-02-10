@@ -24,7 +24,7 @@ public class TransactionServiceImp implements TransactionService {
     @Override
     public Transaction create(Transaction transaction) {
         Person person = personRepository.findById(transaction.getPersonId()).orElseThrow(NoSuchElementException::new);
-        if(person.getAge() < 18 && transaction.getType().equalsIgnoreCase("income")){
+        if(!person.isAdult() && transaction.isIncome()){
             throw new IllegalArgumentException("Underage person cannot have an income");
         }
         return transactionRepository.save(transaction);

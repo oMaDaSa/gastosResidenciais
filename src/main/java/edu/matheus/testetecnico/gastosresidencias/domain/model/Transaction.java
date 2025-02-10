@@ -1,13 +1,8 @@
 package edu.matheus.testetecnico.gastosresidencias.domain.model;
 
-import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.annotation.Nullable;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import org.hibernate.annotations.Check;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Positive;
 
 @Entity
 public class Transaction {
@@ -16,13 +11,27 @@ public class Transaction {
     @Schema(hidden = true)
     private Long id;
 
+    @Column(nullable = false)
     private Long personId;
 
+    @Positive
     private Double amount;
 
     private String desc;
 
-    private String type;
+    @Enumerated
+
+    private TransactionType type;
+
+    @Schema(hidden = true)
+    public boolean isIncome(){
+        return (type ==TransactionType.INCOME || type == TransactionType.RECEITA);
+    }
+
+    @Schema(hidden = true)
+    public boolean isExpense(){
+        return  (type ==TransactionType.EXPENSE || type == TransactionType.DESPESA);
+    }
 
     public Long getId() {
         return id;
@@ -56,11 +65,11 @@ public class Transaction {
         this.desc = desc;
     }
 
-    public String getType() {
+    public TransactionType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(TransactionType type) {
         this.type = type;
     }
 }

@@ -2,7 +2,9 @@ package edu.matheus.testetecnico.gastosresidencias.controller;
 
 import edu.matheus.testetecnico.gastosresidencias.domain.model.Person;
 import edu.matheus.testetecnico.gastosresidencias.service.PersonService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -19,7 +21,7 @@ public class PersonController {
     }
 
     @PostMapping
-    public ResponseEntity<Person> create(@RequestBody Person person){
+    public ResponseEntity<Person> create(@RequestBody @Valid Person person){
         Person personCreated = personService.create(person);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("")
@@ -39,5 +41,11 @@ public class PersonController {
     public ResponseEntity<List<Person>> findAll(){
         List<Person> people = personService.findAll();
         return ResponseEntity.ok(people);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteById(@RequestParam Long id){
+        personService.deleteById(id);
+        return ResponseEntity.ok().build();
     }
 }

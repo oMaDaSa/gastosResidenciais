@@ -1,10 +1,10 @@
 package edu.matheus.testetecnico.gastosresidencias.domain.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import org.hibernate.annotations.Check;
 
 @Entity
 public class Person {
@@ -12,8 +12,17 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Schema(hidden = true)
     private Long id;
+
+    @Column(nullable = false)
     private String name;
+
+    @Positive
     private int age;
+
+    @Schema(hidden = true)
+    public boolean isAdult(){
+        return age >= 18;
+    }
 
     public Long getId() {
         return id;
