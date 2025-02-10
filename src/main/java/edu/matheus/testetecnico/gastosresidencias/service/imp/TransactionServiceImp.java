@@ -27,6 +27,13 @@ public class TransactionServiceImp implements TransactionService {
         if(!person.isAdult() && transaction.isIncome()){
             throw new IllegalArgumentException("Underage person cannot have an income");
         }
+        double amount = transaction.getAmount();
+        if(transaction.isIncome()){
+            person.registerIncome(amount);
+        }else if(transaction.isExpense()){
+            person.registerExpense(amount);
+        }
+        personRepository.save(person);
         return transactionRepository.save(transaction);
     }
 

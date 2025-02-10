@@ -19,9 +19,38 @@ public class Person {
     @Positive
     private int age;
 
+    @Positive
+    @Schema(hidden = true)
+    private double incomeTotal = 0;
+
+    @Positive
+    @Schema(hidden = true)
+    private double expenseTotal = 0;
+
+    @Schema(hidden = true)
+    private double balance = 0;
+
     @Schema(hidden = true)
     public boolean isAdult(){
         return age >= 18;
+    }
+
+    public double registerIncome(double value){
+        incomeTotal = getIncomeTotal() + value;
+        setIncomeTotal(incomeTotal);
+        balance = getBalance() + value;
+        setBalance(balance);
+
+        return expenseTotal;
+    }
+
+    public double registerExpense(double value){
+        expenseTotal = getExpenseTotal() + value;
+        setExpenseTotal(expenseTotal);
+        balance = getBalance() - value;
+        setBalance(balance);
+
+        return expenseTotal;
     }
 
     public Long getId() {
@@ -46,5 +75,29 @@ public class Person {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public double getIncomeTotal() {
+        return incomeTotal;
+    }
+
+    public void setIncomeTotal(double incomeTotal) {
+        this.incomeTotal = incomeTotal;
+    }
+
+    public double getExpenseTotal() {
+        return expenseTotal;
+    }
+
+    public void setExpenseTotal(double expenseTotal) {
+        this.expenseTotal = expenseTotal;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
     }
 }

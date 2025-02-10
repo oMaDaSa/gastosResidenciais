@@ -20,7 +20,6 @@ public class Transaction {
     private String desc;
 
     @Enumerated
-
     private TransactionType type;
 
     @Schema(hidden = true)
