@@ -12,7 +12,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/person")
+@RequestMapping("/api/person")
 public class PersonController {
     private final PersonService personService;
 
@@ -32,7 +32,7 @@ public class PersonController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Person> findById(@RequestParam Long id){
+    public ResponseEntity<Person> findById(@PathVariable Long id){
         Person person = personService.findById(id);
         return ResponseEntity.ok(person);
     }
@@ -44,7 +44,7 @@ public class PersonController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteById(@RequestParam Long id){
+    public ResponseEntity<Void> deleteById(@PathVariable Long id){
         personService.deleteById(id);
         return ResponseEntity.ok().build();
     }

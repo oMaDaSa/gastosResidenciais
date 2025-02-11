@@ -10,7 +10,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/transaction")
+@RequestMapping("/api/transaction")
 public class TransactionController {
     private final TransactionService transactionService;
 
@@ -35,8 +35,8 @@ public class TransactionController {
         return ResponseEntity.ok(transactions);
     }
 
-    @GetMapping("/person-id")
-    public ResponseEntity<List<Transaction>> findAllByPerson(@RequestParam Long id){
+    @GetMapping("/person-id/{id}")
+    public ResponseEntity<List<Transaction>> findAllByPerson(@PathVariable Long id){
         List<Transaction> transactions = transactionService.findAllByPerson(id);
         return ResponseEntity.ok(transactions);
     }
