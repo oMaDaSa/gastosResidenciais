@@ -1,6 +1,6 @@
-package edu.matheus.testetecnico.gastosresidencias.service;
+package edu.matheus.testetecnico.gastosresidencias.backend.service;
 
-import edu.matheus.testetecnico.gastosresidencias.domain.model.Transaction;
+import edu.matheus.testetecnico.gastosresidencias.backend.domain.model.Transaction;
 
 import java.util.List;
 

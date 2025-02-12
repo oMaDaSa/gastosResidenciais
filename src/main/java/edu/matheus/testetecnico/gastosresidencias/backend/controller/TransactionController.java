@@ -1,7 +1,7 @@
-package edu.matheus.testetecnico.gastosresidencias.controller;
+package edu.matheus.testetecnico.gastosresidencias.backend.controller;
 
-import edu.matheus.testetecnico.gastosresidencias.domain.model.Transaction;
-import edu.matheus.testetecnico.gastosresidencias.service.TransactionService;
+import edu.matheus.testetecnico.gastosresidencias.backend.domain.model.Transaction;
+import edu.matheus.testetecnico.gastosresidencias.backend.service.TransactionService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;

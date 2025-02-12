@@ -1,4 +1,4 @@
-package edu.matheus.testetecnico.gastosresidencias.domain.model;
+package edu.matheus.testetecnico.gastosresidencias.backend.domain.model;
 
 public enum TransactionType {
     INCOME,

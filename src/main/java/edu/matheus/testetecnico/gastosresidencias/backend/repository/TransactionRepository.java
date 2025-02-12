@@ -1,6 +1,6 @@
-package edu.matheus.testetecnico.gastosresidencias.repository;
+package edu.matheus.testetecnico.gastosresidencias.backend.repository;
 
-import edu.matheus.testetecnico.gastosresidencias.domain.model.Transaction;
+import edu.matheus.testetecnico.gastosresidencias.backend.domain.model.Transaction;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

@@ -1,9 +1,9 @@
-package edu.matheus.testetecnico.gastosresidencias.service.imp;
+package edu.matheus.testetecnico.gastosresidencias.backend.service.imp;
 
-import edu.matheus.testetecnico.gastosresidencias.domain.model.Person;
-import edu.matheus.testetecnico.gastosresidencias.repository.PersonRepository;
-import edu.matheus.testetecnico.gastosresidencias.repository.TransactionRepository;
-import edu.matheus.testetecnico.gastosresidencias.service.PersonService;
+import edu.matheus.testetecnico.gastosresidencias.backend.repository.TransactionRepository;
+import edu.matheus.testetecnico.gastosresidencias.backend.service.PersonService;
+import edu.matheus.testetecnico.gastosresidencias.backend.domain.model.Person;
+import edu.matheus.testetecnico.gastosresidencias.backend.repository.PersonRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

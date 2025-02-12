@@ -1,16 +1,16 @@
-package edu.matheus.testetecnico.gastosresidencias.controller;
+package edu.matheus.testetecnico.gastosresidencias.backend.controller;
 
-import edu.matheus.testetecnico.gastosresidencias.domain.model.Person;
-import edu.matheus.testetecnico.gastosresidencias.service.PersonService;
+import edu.matheus.testetecnico.gastosresidencias.backend.service.PersonService;
+import edu.matheus.testetecnico.gastosresidencias.backend.domain.model.Person;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/person")
 public class PersonController {

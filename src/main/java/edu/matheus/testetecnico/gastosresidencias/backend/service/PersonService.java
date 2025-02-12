@@ -1,7 +1,6 @@
-package edu.matheus.testetecnico.gastosresidencias.service;
+package edu.matheus.testetecnico.gastosresidencias.backend.service;
 
-import edu.matheus.testetecnico.gastosresidencias.domain.model.Person;
-import org.springframework.stereotype.Service;
+import edu.matheus.testetecnico.gastosresidencias.backend.domain.model.Person;
 
 import java.util.List;
 

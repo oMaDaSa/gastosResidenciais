@@ -1,4 +1,4 @@
-package edu.matheus.testetecnico.gastosresidencias;
+package edu.matheus.testetecnico.gastosresidencias.backend;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.servers.Server;
@@ -10,10 +10,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @OpenAPIDefinition(servers = { @Server(url = "/", description = "Default Server URL")})
 @SpringBootApplication
 
-public class GastosResidenciasApplication {
+public class Backend {
 
     public static void main(String[] args) {
-        SpringApplication.run(GastosResidenciasApplication.class, args);
+        SpringApplication.run(Backend.class, args);
     }
 
 }
