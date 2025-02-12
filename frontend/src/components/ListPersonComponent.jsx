@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { listPersons } from '../services/PersonService';
+import { useNavigate } from 'react-router-dom';
 
 const ListPersonComponent = () => {
+
+    const navigator = useNavigate();
+
     const [people, setPerson] = useState([]);
     const [totals, setTotals] = useState({
         incomeTotal: 0,
-        expenseTotal: 0, // Corrected property name
-        balance: 0      // Corrected property name
+        expenseTotal: 0,
+        balance: 0      
     });
 
     useEffect(() => {
@@ -27,9 +31,19 @@ const ListPersonComponent = () => {
         });
     }, []);
 
+    function addNewPerson(){
+        navigator('add-person');
+    }
+
+    function addNewTransaction(){
+        navigator('add-transaction');
+    }
+
     return (
         <div className='container'>
             <h2 className='text-center'>Pessoas</h2>
+            <button className = "btn btn-primary mx-2 my-1" onClick={addNewPerson}> Adicionar Pessoa</button>
+            <button className = "btn btn-primary mx-2 my-1" onClick={addNewTransaction}> Adicionar Transação</button>
             <table className='table table-striped table-bordered'>
                 <thead>
                     <tr>

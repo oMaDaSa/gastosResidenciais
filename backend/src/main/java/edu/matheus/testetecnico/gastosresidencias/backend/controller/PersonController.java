@@ -22,6 +22,7 @@ public class PersonController {
 
     @PostMapping
     public ResponseEntity<Person> create(@RequestBody @Valid Person person){
+
         Person personCreated = personService.create(person);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("")
