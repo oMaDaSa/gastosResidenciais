@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public interface PersonRepository extends JpaRepository<Person, Long> {
+    //operação de deleção de pessoa. Modifica a tabela e transactional para garantir ACID
     @Modifying
     @Transactional
     @Query("DELETE FROM Person p WHERE p.id = :id")

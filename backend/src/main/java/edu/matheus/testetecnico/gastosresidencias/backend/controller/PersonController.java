@@ -10,7 +10,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 
-@CrossOrigin("*")
+@CrossOrigin("*") //habilitar acesso de outras portas
 @RestController
 @RequestMapping("/api/person")
 public class PersonController {
@@ -22,7 +22,7 @@ public class PersonController {
 
     @PostMapping
     public ResponseEntity<Person> create(@RequestBody @Valid Person person){
-
+        //cria uma pessoa (Nome e idade são as unicas informações necessárias)
         Person personCreated = personService.create(person);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("")
@@ -34,18 +34,21 @@ public class PersonController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Person> findById(@PathVariable Long id){
+        //Get na pessoa com id passado por parametro
         Person person = personService.findById(id);
         return ResponseEntity.ok(person);
     }
 
     @GetMapping("/all")
     public ResponseEntity<List<Person>> findAll(){
+        //Get em todas as pessoas
         List<Person> people = personService.findAll();
         return ResponseEntity.ok(people);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable Long id){
+        //Deleta a pessoa com id passado por parametro
         personService.deleteById(id);
         return ResponseEntity.ok().build();
     }

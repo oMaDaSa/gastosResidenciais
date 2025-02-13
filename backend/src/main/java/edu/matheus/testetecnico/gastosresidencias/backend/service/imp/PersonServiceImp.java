@@ -37,7 +37,9 @@ public class PersonServiceImp implements PersonService {
 
     @Override
     public void deleteById(Long id){
-        findById(id); //Se não encontrar, joga excessão NoSuchElement e cód 500
+        //Deletar primeiro o usuario e depois todas suas transações
+        //buscar, antes, o usuário pelo id. Se não encontrar, joga excessão NoSuchElement e cód. 500
+        findById(id);
         personRepository.deleteById(id); //Deleta a pessoa
         transactionRepository.deleteAllByPerson(id); //Deleta as transações que a pessoa realizou
     }

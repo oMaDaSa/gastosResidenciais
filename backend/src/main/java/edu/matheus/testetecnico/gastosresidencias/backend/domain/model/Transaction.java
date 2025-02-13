@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Positive;
 
 @Entity
 public class Transaction {
+    ////schema hidden para não aparecer no exemplo do json do swagger
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Schema(hidden = true)
@@ -24,11 +25,13 @@ public class Transaction {
 
     @Schema(hidden = true)
     public boolean isIncome(){
+        //verificar se o tipo é receita
         return (type ==TransactionType.INCOME || type == TransactionType.RECEITA);
     }
 
     @Schema(hidden = true)
     public boolean isExpense(){
+        //verificar se o tipo é despesa
         return  (type ==TransactionType.EXPENSE || type == TransactionType.DESPESA);
     }
 

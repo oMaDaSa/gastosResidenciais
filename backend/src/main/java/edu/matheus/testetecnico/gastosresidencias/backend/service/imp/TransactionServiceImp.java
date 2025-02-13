@@ -23,11 +23,15 @@ public class TransactionServiceImp implements TransactionService {
 
     @Override
     public Transaction create(Transaction transaction) {
+        //Encontrar a pessoa a qual a transação se aplica, para alterar seus totais
         Person person = personRepository.findById(transaction.getPersonId()).orElseThrow(NoSuchElementException::new);
         if(!person.isAdult() && transaction.isIncome()){
+            //Apenas adultos podem ter receita
             throw new IllegalArgumentException("Underage person cannot have an income");
         }
         double amount = transaction.getAmount();
+
+        //registrar a transação nos totais da pessoa
         if(transaction.isIncome()){
             person.registerIncome(amount);
         }else if(transaction.isExpense()){

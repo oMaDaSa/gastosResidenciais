@@ -2,12 +2,11 @@ package edu.matheus.testetecnico.gastosresidencias.backend.domain.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
-import org.hibernate.annotations.Check;
 
 @Entity
 public class Person {
+    //schema hidden para não aparecer no exemplo do json do swagger
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Schema(hidden = true)
@@ -32,25 +31,26 @@ public class Person {
 
     @Schema(hidden = true)
     public boolean isAdult(){
+        //verificar maioridade (menores não podem ter receita)
         return age >= 18;
     }
 
-    public double registerIncome(double value){
+    public void registerIncome(double value){
+        //Atualizar receita total e o saldo geral
         incomeTotal = getIncomeTotal() + value;
         setIncomeTotal(incomeTotal);
         balance = getBalance() + value;
         setBalance(balance);
 
-        return expenseTotal;
     }
 
-    public double registerExpense(double value){
+    public void registerExpense(double value){
+        //Atualizar despesa total e o saldo geral
         expenseTotal = getExpenseTotal() + value;
         setExpenseTotal(expenseTotal);
         balance = getBalance() - value;
         setBalance(balance);
 
-        return expenseTotal;
     }
 
     public Long getId() {
