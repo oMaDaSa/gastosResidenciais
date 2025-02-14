@@ -4,13 +4,16 @@ import { useNavigate } from 'react-router-dom';
 
 const TransactionComponent = () => {
   
+    //para o formulario
     const [personId, setPersonId] = useState('')
     const [amount, setAmount] = useState('')
     const [type, setType] = useState('')
     const [desc, setDesc] = useState('')
 
+    //hook para navegação
     const navigator = useNavigate();
 
+    //para erros de validação
     const [errors, setErrors] = useState({
             personId: '',
             amount: '',
@@ -19,15 +22,15 @@ const TransactionComponent = () => {
         })
     
     function saveTransaction(e){
-        e.preventDefault();
+        e.preventDefault(); //previnir a pagina de carregar para enviar os dados ao backend
 
         const transaction = {personId, amount, type, desc}
         console.log(transaction);
 
-        if(validateForm()){
+        if(validateForm()){ //checar form
             createTransaction(transaction).then((response) => {
                 console.log(response.data);
-                navigator('/persons');
+                navigator('/persons'); //volta para pagina inicial
             })
         }
     
@@ -40,33 +43,33 @@ const TransactionComponent = () => {
 
         if(personId.trim()){
             const personIdNum = Number(personId)
-            if(personIdNum < 0 || isNaN(personIdNum)){
+            if(personIdNum < 0 || isNaN(personIdNum)){ //id negativo ou nao numerico
                 errorsCopy.personId = 'Insira um id valido';
                 valid = false;
-            }else{
+            }else{ //sucesso
                 errorsCopy.personId = '';
             }
-        }else{
+        }else{ //nada inserido
             errorsCopy.personId = 'Insira um id';
             valid = false;
         }
 
         if(amount.trim()){
             const amountNum = Number(amount)
-            if(amountNum < 0 || isNaN(amountNum)){
+            if(amountNum < 0 || isNaN(amountNum)){ //quantia negativa ou nao numerica
                 errorsCopy.amount = 'Insira uma quantia valida';
                 valid = false;
-            }else{
+            }else{//sucesso
                 errorsCopy.amount = '';
             }
-        }else{
+        }else{ //nada inserido
             errorsCopy.amount = 'Insira uma quantia';
             valid = false;
         }
 
-        if(type.trim()){
+        if(type.trim()){//sucesso
             errorsCopy.type = '';
-        }else{
+        }else{//nada inserido
             errorsCopy.type = 'Insira um tipo';
             valid = false;
         }
@@ -88,14 +91,15 @@ const TransactionComponent = () => {
                         <div className='form-group mb-2'>
                             <label className='form-label'>Id da pessoa:</label>
                             <input 
+                                //comentarios se aplicam ao demais inputs
                                 type='text' 
                                 placeholder='Inserir id'
                                 name='id'
                                 value={personId} 
-                                className={`form-control ${ errors.personId ? 'is-invalid': ''}`}
-                                onChange={(e) => setPersonId(e.target.value)}
+                                className={`form-control ${ errors.personId ? 'is-invalid': ''}`} //se errors.personId retornar algo, usar classe is-invalid, se nao, nada
+                                onChange={(e) => setPersonId(e.target.value)} //atualiza o dado inserido na transação a ser cadastrada
                             ></input>
-                            { errors.personId && <div className='invalid-feedback'>{ errors.personId }</div>}
+                            { errors.personId && <div className='invalid-feedback'>{ errors.personId }</div>/*se houver erro, adiciona mensagem detalhando o erro*/}
                         </div>
                         <div className='form-group mb-2'>
                             <label className='form-label'>Quantia:</label>
@@ -135,7 +139,6 @@ const TransactionComponent = () => {
                             </select>
                             { errors.type && <div className='invalid-feedback'>{ errors.type }</div>}
                         </div>
-
                         <button className='btn btn-success' onClick={saveTransaction}>Enviar</button>
                     </form>
                 </div>

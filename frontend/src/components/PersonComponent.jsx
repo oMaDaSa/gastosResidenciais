@@ -3,21 +3,21 @@ import { createPerson } from '../services/PersonService';
 import { useNavigate } from 'react-router-dom';
 
 const PersonComponent = () => {
-
+    //para o formulario 
     const [name, setName] = useState('')
     const [age, setAge] = useState('')
 
-    const [errors, setErrors] = useState({
+    const [errors, setErrors] = useState({ //para erros de validação
         name: '',
         age: ''
     })
 
-    const navigator = useNavigate();
-    
-    function savePerson(e){
-        e.preventDefault();
+    const navigator = useNavigate(); //hook para navegação 
 
-        if(validateForm()){
+    function savePerson(e){ 
+        e.preventDefault(); //previnir a pagina de carregar para enviar os dados ao backend 
+        
+        if(validateForm()){ //checar form 
             const person = {name, age}
             console.log(person)
     
@@ -33,22 +33,22 @@ const PersonComponent = () => {
 
         const errorsCopy = {... errors}
 
-        if(name.trim()){
+        if(name.trim()){ //sucesso 
             errorsCopy.name = '';
-        }else{
+        }else{ //nada inserido
             errorsCopy.name = 'Insira um nome';
             valid = false;
         }
 
         if(age.trim()){
             const ageNum = Number(age)
-            if(ageNum < 0 || isNaN(ageNum)){
+            if(ageNum < 0 || isNaN(ageNum)){ //idade negativa ou nao numerica 
                 errorsCopy.age = 'Insira uma idade valida';
                 valid = false;
-            }else{
+            }else{ //sucesso 
                 errorsCopy.age = '';
             }
-        }else{
+        }else{ //nada inserido 
             errorsCopy.age = 'Insira uma idade';
             valid = false;
         }
@@ -68,16 +68,16 @@ const PersonComponent = () => {
                     <form>
                         <div className='form-group mb-2'>
                             <label className='form-label'>Nome:</label>
-                            <input 
+                            <input  //comentarios se aplicam ao demais inputs
                                 type='text' 
                                 placeholder='Inserir nome'
                                 name='nome'
                                 value={name}
-                                className={`form-control ${ errors.name ? 'is-invalid': ''}`}
-                                onChange={(e) => setName(e.target.value)}
+                                className={`form-control ${ errors.name ? 'is-invalid': ''}`}//se errors.name retornar algo, usar classe is-invalid, se nao, nada 
+                                onChange={(e) => setName(e.target.value)} //atualiza o dado inserido na transação a ser cadastrada 
                                 required
                             ></input>
-                            { errors.name && <div className='invalid-feedback'>{ errors.name }</div>}
+                            { errors.name && <div className='invalid-feedback'>{ errors.name }</div>/*se houver erro, adiciona mensagem detalhando o erro*/}
                         </div>
                         <div className='form-group mb-2'>
                             <label className='form-label'>Idade:</label>

@@ -4,6 +4,7 @@ import ListPersonComponent from './components/ListPersonComponent';
 import { BrowserRouter, Route, Routes} from 'react-router-dom';
 import PersonComponent from './components/PersonComponent';
 import TransactionComponent from './components/TransactionComponent';
+import ListPersonTransactionsComponent from './components/ListPersonTransactionsComponent';
 
 function App() {
 
@@ -12,14 +13,16 @@ function App() {
     <BrowserRouter>
       <HeaderComponent />
       <Routes>
-        {/* // http:localhost:3000 */}
+        {/* http:localhost:3000 */}
         <Route path='/' element = { <ListPersonComponent />}></Route>
-        {/* // http:localhost:3000/persons */}
+        {/* http:localhost:3000/persons */}
         <Route path='/persons' element = { <ListPersonComponent />}></Route>
-        {/* // http:localhost:3000/add-person */}
+        {/* http:localhost:3000/add-person */}
         <Route path='/persons/add-person' element = { <PersonComponent />}></Route>
-        {/* // http:localhost:3000/add-transaction */}
+        {/* http:localhost:3000/add-transaction */}
         <Route path='/persons/add-transaction' element = { <TransactionComponent />}></Route>
+        {/* http:localhost:3000/person-transactions */}
+        <Route path='/persons/person-transactions/:id' element = { <ListPersonTransactionsComponent />}></Route>
       </Routes>
     </BrowserRouter>
     </>

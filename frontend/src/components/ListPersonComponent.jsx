@@ -6,8 +6,8 @@ const ListPersonComponent = () => {
 
     const navigator = useNavigate();
 
-    const [people, setPerson] = useState([]);
-    const [totals, setTotals] = useState({
+    const [persons, setPerson] = useState([]);
+    const [totals, setTotals] = useState({ //calcular os totais, iniciando com 0
         incomeTotal: 0,
         expenseTotal: 0,
         balance: 0      
@@ -22,7 +22,7 @@ const ListPersonComponent = () => {
             const data = response.data;
             setPerson(data);
 
-            const calculatedTotals = data.reduce((acc, person) => {
+            const calculatedTotals = data.reduce((acc, person) => { //somar aos totais cada receita, despesa e saldo de cada pessoa 
                 acc.incomeTotal += person.incomeTotal; 
                 acc.expenseTotal += person.expenseTotal; 
                 acc.balance += person.balance;      
@@ -41,6 +41,10 @@ const ListPersonComponent = () => {
 
     function addNewTransaction(){
         navigator('add-transaction');
+    }
+
+    function personTransactions(id){
+        navigator('person-transactions/' + id);
     }
 
     function removePerson(id){
@@ -73,7 +77,7 @@ const ListPersonComponent = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {people.map(person => (
+                    {persons.map(person => (
                         <tr key={person.id}>
                             <td>{person.id}</td>
                             <td>{person.name}</td>
@@ -82,7 +86,8 @@ const ListPersonComponent = () => {
                             <td>{person.expenseTotal}</td>
                             <td>{person.balance}</td>
                             <td>
-                                <button className='btn btn-danger' style={{width:'100%'}} onClick={() => removePerson(person.id)}>Deletar</button>
+                                <button className='btn btn-info' style={{ width: '50%' }} onClick={() => personTransactions(person.id)}>Transações</button>
+                                <button className='btn btn-danger' style={{ width: '50%' }} onClick={() => removePerson(person.id)}>Deletar</button>
                             </td>
                         </tr>
                     ))}
