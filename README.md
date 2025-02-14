@@ -34,4 +34,10 @@ Para executar o projeto, siga os seguintes passos:
     **OBS:** É necessário que o Gradle esteja configurado nas variáveis de ambiente do sistema.
 3.  Como alternativa, o backend pode ser executado através de uma IDE
 
+### Rodando
+
+1.  Abra em um navegador os links:
+2.  Frontend: http://localhost:3000
+3.  Documentação da API com Swagger: http://localhost:8080/swagger-ui/index.html
+
 Github repo: https://github.com/oMaDaSa/gastosResidenciais
