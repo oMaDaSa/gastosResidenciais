@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes, Navigate} from 'react-router-dom';
 import PersonComponent from './components/PersonComponent';
 import TransactionComponent from './components/TransactionComponent';
 import ListPersonTransactionsComponent from './components/ListPersonTransactionsComponent';
+import RecurrenceComponent from './components/RecurrenceComponent';
 
 function App() {
 
@@ -24,6 +25,13 @@ function App() {
 
         {/* http:localhost:3000/add-transaction */}
         <Route path='/persons/add-transaction' element = { <TransactionComponent />}></Route>
+
+        {/* http:localhost:3000/add-recurrence */}
+        <Route path='/persons/add-recurrence' element = { <RecurrenceComponent />}></Route>
+
+        {/* http:localhost:3000/add-recurrence 
+        <Route path='/persons/person-recurrences' element = { <ListPersonRecurrenceComponent />}></Route>
+        */}
         
         {/* http:localhost:3000/person-transactions */}
         <Route path='/persons/person-transactions/:id' element = { <ListPersonTransactionsComponent />}></Route>

@@ -1,11 +1,12 @@
 import React, { useState }from 'react'
-import { createTransaction } from '../services/TransactionService';
+//import { createRecurrence } from '../services/RecurrenceService';
 import { useNavigate } from 'react-router-dom';
 
-const TransactionComponent = () => {
+const RecurrenceComponent = () => {
   
     //para o formulario
     const [personId, setPersonId] = useState('')
+    const [recurrence, setRecurrence] = useState('')
     const [amount, setAmount] = useState('')
     const [type, setType] = useState('')
     const [desc, setDesc] = useState('')
@@ -16,6 +17,7 @@ const TransactionComponent = () => {
     //para erros de validação
     const [errors, setErrors] = useState({
             personId: '',
+            recurrence: '',
             amount: '',
             desc: '',
             type: ''
@@ -24,11 +26,11 @@ const TransactionComponent = () => {
     function saveTransaction(e){
         e.preventDefault(); //previnir a pagina de carregar para enviar os dados ao backend
 
-        const transaction = {personId, amount, type, desc}
+        const recurrence = {personId, recurrence, amount, type, desc}
         console.log(transaction);
 
         if(validateForm()){ //checar form
-            createTransaction(transaction).then((response) => {
+            createRecurrence(recurrence).then((response) => {
                 console.log(response.data);
                 navigator('/persons'); //volta para pagina inicial
             })
@@ -67,6 +69,13 @@ const TransactionComponent = () => {
             valid = false;
         }
 
+        if(recurrence.trim()){//sucesso
+            errorsCopy.recurrence = '';
+        }else{//nada inserido
+            errorsCopy.recurrence = 'Insira um tipo de recorrência';
+            valid = false;
+        }
+
         if(type.trim()){//sucesso
             errorsCopy.type = '';
         }else{//nada inserido
@@ -85,7 +94,7 @@ const TransactionComponent = () => {
         <br></br>
         <div className='row'>
             <div className='card col-md-6 offset-md-3 offset-md-3'>
-                <h2 className = 'text-center'>Adicionar Transação</h2>
+                <h2 className = 'text-center'>Adicionar Recorrência</h2>
                 <div className='card-body'>
                     <form>
                         <div className='form-group mb-2'>
@@ -100,6 +109,21 @@ const TransactionComponent = () => {
                                 onChange={(e) => setPersonId(e.target.value)} //atualiza o dado inserido na transação a ser cadastrada
                             ></input>
                             { errors.personId && <div className='invalid-feedback'>{ errors.personId }</div>/*se houver erro, adiciona mensagem detalhando o erro*/}
+                        </div>
+                        <div className='form-group mb-2'>
+                            <label className='form-label'>Recorrência:</label>
+                            <select
+                                className={`form-control ${ errors.type ? 'is-invalid': ''}`}
+                                name = 'type'
+                                value={type}
+                                onChange={(e) => setRecurrence(e.target.value)}>
+                                <option value="" disabled>Selecione</option>
+                                <option value="MENSAL">Mensal</option>
+                                <option value="SEMANAL">Despesa</option>
+                                <option value="DIARIO">Diário</option>
+            
+                            </select>
+                            { errors.amount && <div className='invalid-feedback'>{ errors.amount }</div>}
                         </div>
                         <div className='form-group mb-2'>
                             <label className='form-label'>Quantia:</label>
@@ -148,4 +172,4 @@ const TransactionComponent = () => {
   )
 }
 
-export default TransactionComponent
+export default RecurrenceComponent

@@ -6,7 +6,7 @@ const ListPersonComponent = () => {
 
     const navigator = useNavigate();
 
-    const [persons, setPerson] = useState([]);
+    const [persons, setPersons] = useState([]);
     const [totals, setTotals] = useState({ //calcular os totais, iniciando com 0
         incomeTotal: 0,
         expenseTotal: 0,
@@ -20,7 +20,7 @@ const ListPersonComponent = () => {
     function getAllPersons(){
         listPersons().then((response) => {
             const data = response.data;
-            setPerson(data);
+            setPersons(data);
 
             const calculatedTotals = data.reduce((acc, person) => { //somar aos totais cada receita, despesa e saldo de cada pessoa 
                 acc.incomeTotal += person.incomeTotal; 
@@ -43,13 +43,23 @@ const ListPersonComponent = () => {
         navigator('add-transaction');
     }
 
+    function addNewRecurrence(){
+        navigator('add-recurrence/');
+    }
+
     function personTransactions(id){
         navigator('person-transactions/' + id);
     }
 
+    function personRecurrence(id){
+        navigator('person-recurrences');
+    }
+
+    
+
     function removePerson(id){
         console.log(id);
-        deletePerson(id).then((responde) => {
+        deletePerson(id).then((response) => {
             getAllPersons();
         }).catch(error => {
             console.error(error);
@@ -60,8 +70,9 @@ const ListPersonComponent = () => {
         <div className='container'>
             <h2 className='text-center'>Pessoas</h2>
             <div className='text-center'>
-                <button className = "btn btn-primary mx-2 my-1" onClick={addNewPerson}> Adicionar Pessoa</button>
-                <button className = "btn btn-primary mx-2 my-1" onClick={addNewTransaction}> Adicionar Transação</button>
+                <button className = "btn btn-primary mx-2 my-2" onClick={addNewPerson}> Adicionar Pessoa</button>
+                <button className = "btn btn-primary mx-2 my-2" onClick={addNewTransaction}> Adicionar Transação</button>
+                <button className = "btn btn-primary mx-2 my-2" onClick={addNewRecurrence}> Adicionar Recorrência</button>
             </div>
             
             <table className='table table-striped table-bordered'>
@@ -73,7 +84,7 @@ const ListPersonComponent = () => {
                         <th>Receita Total</th>
                         <th>Despesa Total</th>
                         <th>Saldo</th>
-                        <th>Deletar</th>
+                        <th>Opções</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -86,8 +97,9 @@ const ListPersonComponent = () => {
                             <td>{person.expenseTotal}</td>
                             <td>{person.balance}</td>
                             <td>
-                                <button className='btn btn-info' style={{ width: '50%' }} onClick={() => personTransactions(person.id)}>Transações</button>
-                                <button className='btn btn-danger' style={{ width: '50%' }} onClick={() => removePerson(person.id)}>Deletar</button>
+                                <button className='btn btn-info text-white w-50' onClick={() => personTransactions(person.id)}>Transações</button>
+                                <button className='btn btn-warning text-white m-1' onClick={() => personRecurrence(person.id)}>Recorrências</button>
+                                <button className='btn btn-danger  text-white' onClick={() => removePerson(person.id)}>Deletar</button>
                             </td>
                         </tr>
                     ))}
