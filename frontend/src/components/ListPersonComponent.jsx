@@ -51,8 +51,8 @@ const ListPersonComponent = () => {
         navigator('person-transactions/' + id);
     }
 
-    function personRecurrence(id){
-        navigator('person-recurrences');
+    function personRecurrences(id){
+        navigator('person-recurrences/'+ id);
     }
 
     
@@ -98,7 +98,7 @@ const ListPersonComponent = () => {
                             <td>{person.balance}</td>
                             <td>
                                 <button className='btn btn-info text-white w-50' onClick={() => personTransactions(person.id)}>Transações</button>
-                                <button className='btn btn-warning text-white m-1' onClick={() => personRecurrence(person.id)}>Recorrências</button>
+                                <button className='btn btn-warning text-white m-1' onClick={() => personRecurrences(person.id)}>Recorrências</button>
                                 <button className='btn btn-danger  text-white' onClick={() => removePerson(person.id)}>Deletar</button>
                             </td>
                         </tr>

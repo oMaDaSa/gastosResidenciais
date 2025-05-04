@@ -1,12 +1,12 @@
 import React, { useState }from 'react'
-//import { createRecurrence } from '../services/RecurrenceService';
+import { createRecurrence } from '../services/RecurrenceService';
 import { useNavigate } from 'react-router-dom';
 
 const RecurrenceComponent = () => {
   
     //para o formulario
     const [personId, setPersonId] = useState('')
-    const [recurrence, setRecurrence] = useState('')
+    const [recurrenceType, setRecurrenceType] = useState('')
     const [amount, setAmount] = useState('')
     const [type, setType] = useState('')
     const [desc, setDesc] = useState('')
@@ -17,17 +17,17 @@ const RecurrenceComponent = () => {
     //para erros de validação
     const [errors, setErrors] = useState({
             personId: '',
-            recurrence: '',
+            recurrenceType: '',
             amount: '',
             desc: '',
             type: ''
         })
     
-    function saveTransaction(e){
+    function saveRecurrence(e){
         e.preventDefault(); //previnir a pagina de carregar para enviar os dados ao backend
 
-        const recurrence = {personId, recurrence, amount, type, desc}
-        console.log(transaction);
+        const recurrence = {personId, recurrenceType, amount, type, desc}
+        console.log(recurrence);
 
         if(validateForm()){ //checar form
             createRecurrence(recurrence).then((response) => {
@@ -69,10 +69,10 @@ const RecurrenceComponent = () => {
             valid = false;
         }
 
-        if(recurrence.trim()){//sucesso
-            errorsCopy.recurrence = '';
+        if(recurrenceType.trim()){//sucesso
+            errorsCopy.recurrenceType = '';
         }else{//nada inserido
-            errorsCopy.recurrence = 'Insira um tipo de recorrência';
+            errorsCopy.recurrenceType = 'Insira um tipo de recorrência';
             valid = false;
         }
 
@@ -115,11 +115,11 @@ const RecurrenceComponent = () => {
                             <select
                                 className={`form-control ${ errors.type ? 'is-invalid': ''}`}
                                 name = 'type'
-                                value={type}
-                                onChange={(e) => setRecurrence(e.target.value)}>
+                                value={recurrenceType}
+                                onChange={(e) => setRecurrenceType(e.target.value)}>
                                 <option value="" disabled>Selecione</option>
                                 <option value="MENSAL">Mensal</option>
-                                <option value="SEMANAL">Despesa</option>
+                                <option value="SEMANAL">Semanal</option>
                                 <option value="DIARIO">Diário</option>
             
                             </select>
@@ -163,7 +163,7 @@ const RecurrenceComponent = () => {
                             </select>
                             { errors.type && <div className='invalid-feedback'>{ errors.type }</div>}
                         </div>
-                        <button className='btn btn-success' onClick={saveTransaction}>Enviar</button>
+                        <button className='btn btn-success' onClick={saveRecurrence}>Enviar</button>
                     </form>
                 </div>
             </div>
